@@ -187,7 +187,7 @@ class LLP:
                 data_for_csv.append([r, "heads"] + heads[r])
             rng = max([len(y_pred[r]) for r in self.pred_sample])
             df = pd.DataFrame(data_for_csv, columns=["Predicate", "Set"] + ["Value" + str(i) for i in range(rng)])
-            df.to_csv("llp_results.csv", index=False)
+            df.to_csv("predictions.csv", index=False)
 
         return e_r
 
