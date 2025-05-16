@@ -1,0 +1,131 @@
+Expression,Type,Symbolic_Retrieval
+∃ hasChild.{markus ⊔ michelle ⊔ anna},OWLObjectSomeValuesFrom,"{'http://example.com/father#markus', 'http://example.com/father#stefan'}"
+(¬person) ⊔ (¬person),OWLObjectUnionOf,set()
+∃ hasChild.{markus ⊔ anna ⊔ heinz},OWLObjectSomeValuesFrom,"{'http://example.com/father#markus', 'http://example.com/father#martin', 'http://example.com/father#stefan', 'http://example.com/father#anna'}"
+person ⊔ (¬person),OWLObjectUnionOf,"{'http://example.com/father#markus', 'http://example.com/father#anna', 'http://example.com/father#martin', 'http://example.com/father#stefan', 'http://example.com/father#michelle', 'http://example.com/father#heinz'}"
+∃ hasChild⁻.{martin ⊔ michelle ⊔ heinz},OWLObjectSomeValuesFrom,{'http://example.com/father#heinz'}
+person ⊓ (¬person),OWLObjectIntersectionOf,set()
+∃ hasChild.{markus ⊔ michelle ⊔ heinz},OWLObjectSomeValuesFrom,"{'http://example.com/father#anna', 'http://example.com/father#martin', 'http://example.com/father#stefan'}"
+∃ hasChild.{stefan ⊔ martin ⊔ markus},OWLObjectSomeValuesFrom,{'http://example.com/father#stefan'}
+∃ hasChild.{markus ⊔ martin ⊔ michelle},OWLObjectSomeValuesFrom,{'http://example.com/father#stefan'}
+(¬person) ⊓ (¬person),OWLObjectIntersectionOf,set()
+∃ hasChild.{martin ⊔ michelle ⊔ heinz},OWLObjectSomeValuesFrom,"{'http://example.com/father#anna', 'http://example.com/father#martin'}"
+≥ 1 hasChild.person,OWLObjectMinCardinality,"{'http://example.com/father#markus', 'http://example.com/father#martin', 'http://example.com/father#stefan', 'http://example.com/father#anna'}"
+∃ hasChild.{stefan ⊔ martin ⊔ michelle},OWLObjectSomeValuesFrom,set()
+∃ hasChild.{martin ⊔ markus ⊔ heinz},OWLObjectSomeValuesFrom,"{'http://example.com/father#anna', 'http://example.com/father#martin', 'http://example.com/father#stefan'}"
+≤ 1 hasChild⁻.person,OWLObjectMaxCardinality,"{'http://example.com/father#markus', 'http://example.com/father#anna', 'http://example.com/father#martin', 'http://example.com/father#stefan', 'http://example.com/father#michelle'}"
+∃ hasChild.{stefan ⊔ anna ⊔ heinz},OWLObjectSomeValuesFrom,"{'http://example.com/father#markus', 'http://example.com/father#martin', 'http://example.com/father#anna'}"
+≥ 1 hasChild⁻.(¬person),OWLObjectMinCardinality,set()
+∃ hasChild⁻.{markus ⊔ michelle ⊔ anna},OWLObjectSomeValuesFrom,"{'http://example.com/father#anna', 'http://example.com/father#heinz'}"
+∃ hasChild⁻.{stefan ⊔ anna ⊔ heinz},OWLObjectSomeValuesFrom,"{'http://example.com/father#markus', 'http://example.com/father#heinz'}"
+≥ 1 hasChild⁻.(¬person),OWLObjectMinCardinality,set()
+∃ hasChild.{stefan ⊔ markus ⊔ heinz},OWLObjectSomeValuesFrom,"{'http://example.com/father#anna', 'http://example.com/father#martin', 'http://example.com/father#stefan'}"
+≥ 1 hasChild.(¬person),OWLObjectMinCardinality,set()
+≤ 3 hasChild.(¬person),OWLObjectMaxCardinality,"{'http://example.com/father#markus', 'http://example.com/father#anna', 'http://example.com/father#martin', 'http://example.com/father#stefan', 'http://example.com/father#michelle', 'http://example.com/father#heinz'}"
+≥ 3 hasChild⁻.person,OWLObjectMinCardinality,set()
+∃ hasChild⁻.person,OWLObjectSomeValuesFrom,"{'http://example.com/father#markus', 'http://example.com/father#heinz', 'http://example.com/father#anna'}"
+≤ 3 hasChild⁻.(¬person),OWLObjectMaxCardinality,"{'http://example.com/father#markus', 'http://example.com/father#anna', 'http://example.com/father#martin', 'http://example.com/father#stefan', 'http://example.com/father#michelle', 'http://example.com/father#heinz'}"
+∃ hasChild⁻.{markus ⊔ michelle ⊔ heinz},OWLObjectSomeValuesFrom,{'http://example.com/father#anna'}
+∃ hasChild.(¬person),OWLObjectSomeValuesFrom,set()
+∃ hasChild.{martin ⊔ anna ⊔ heinz},OWLObjectSomeValuesFrom,"{'http://example.com/father#markus', 'http://example.com/father#martin', 'http://example.com/father#anna'}"
+≥ 1 hasChild.person,OWLObjectMinCardinality,"{'http://example.com/father#markus', 'http://example.com/father#martin', 'http://example.com/father#stefan', 'http://example.com/father#anna'}"
+∃ hasChild.{martin ⊔ markus ⊔ anna},OWLObjectSomeValuesFrom,"{'http://example.com/father#markus', 'http://example.com/father#stefan'}"
+∃ hasChild⁻.(¬person),OWLObjectSomeValuesFrom,set()
+∃ hasChild⁻.{markus ⊔ stefan ⊔ michelle},OWLObjectSomeValuesFrom,"{'http://example.com/father#markus', 'http://example.com/father#anna'}"
+∃ hasChild⁻.{stefan ⊔ martin ⊔ markus},OWLObjectSomeValuesFrom,"{'http://example.com/father#markus', 'http://example.com/father#heinz', 'http://example.com/father#anna'}"
+∃ hasChild⁻.{stefan ⊔ michelle ⊔ anna},OWLObjectSomeValuesFrom,"{'http://example.com/father#markus', 'http://example.com/father#heinz'}"
+≥ 1 hasChild⁻.person,OWLObjectMinCardinality,"{'http://example.com/father#markus', 'http://example.com/father#heinz', 'http://example.com/father#anna'}"
+∃ hasChild⁻.{stefan ⊔ martin ⊔ anna},OWLObjectSomeValuesFrom,"{'http://example.com/father#markus', 'http://example.com/father#heinz'}"
+≤ 3 hasChild.person,OWLObjectMaxCardinality,"{'http://example.com/father#markus', 'http://example.com/father#anna', 'http://example.com/father#martin', 'http://example.com/father#stefan', 'http://example.com/father#michelle', 'http://example.com/father#heinz'}"
+∃ hasChild.{stefan ⊔ michelle ⊔ heinz},OWLObjectSomeValuesFrom,"{'http://example.com/father#anna', 'http://example.com/father#martin'}"
+≥ 1 hasChild⁻.person,OWLObjectMinCardinality,"{'http://example.com/father#markus', 'http://example.com/father#heinz', 'http://example.com/father#anna'}"
+∃ hasChild.{stefan ⊔ michelle ⊔ anna},OWLObjectSomeValuesFrom,{'http://example.com/father#markus'}
+≤ 2 hasChild⁻.person,OWLObjectMaxCardinality,"{'http://example.com/father#markus', 'http://example.com/father#anna', 'http://example.com/father#martin', 'http://example.com/father#stefan', 'http://example.com/father#michelle', 'http://example.com/father#heinz'}"
+≤ 1 hasChild.person,OWLObjectMaxCardinality,"{'http://example.com/father#markus', 'http://example.com/father#anna', 'http://example.com/father#martin', 'http://example.com/father#stefan', 'http://example.com/father#michelle', 'http://example.com/father#heinz'}"
+≤ 1 hasChild.(¬person),OWLObjectMaxCardinality,"{'http://example.com/father#markus', 'http://example.com/father#anna', 'http://example.com/father#martin', 'http://example.com/father#stefan', 'http://example.com/father#michelle', 'http://example.com/father#heinz'}"
+∀ hasChild⁻.person,OWLObjectAllValuesFrom,"{'http://example.com/father#markus', 'http://example.com/father#anna', 'http://example.com/father#martin', 'http://example.com/father#stefan', 'http://example.com/father#michelle', 'http://example.com/father#heinz'}"
+≤ 2 hasChild.(¬person),OWLObjectMaxCardinality,"{'http://example.com/father#markus', 'http://example.com/father#anna', 'http://example.com/father#martin', 'http://example.com/father#stefan', 'http://example.com/father#michelle', 'http://example.com/father#heinz'}"
+∃ hasChild⁻.{stefan ⊔ markus ⊔ heinz},OWLObjectSomeValuesFrom,"{'http://example.com/father#markus', 'http://example.com/father#anna'}"
+∃ hasChild⁻.{markus ⊔ martin ⊔ michelle},OWLObjectSomeValuesFrom,"{'http://example.com/father#anna', 'http://example.com/father#heinz'}"
+≥ 3 hasChild.(¬person),OWLObjectMinCardinality,set()
+∀ hasChild⁻.(¬person),OWLObjectAllValuesFrom,"{'http://example.com/father#martin', 'http://example.com/father#stefan', 'http://example.com/father#michelle'}"
+∃ hasChild⁻.{markus ⊔ anna ⊔ heinz},OWLObjectSomeValuesFrom,"{'http://example.com/father#anna', 'http://example.com/father#heinz'}"
+≥ 3 hasChild⁻.(¬person),OWLObjectMinCardinality,set()
+∃ hasChild⁻.{martin ⊔ markus ⊔ heinz},OWLObjectSomeValuesFrom,"{'http://example.com/father#anna', 'http://example.com/father#heinz'}"
+∃ hasChild.{stefan ⊔ martin ⊔ heinz},OWLObjectSomeValuesFrom,"{'http://example.com/father#anna', 'http://example.com/father#martin'}"
+∃ hasChild⁻.{stefan ⊔ michelle ⊔ heinz},OWLObjectSomeValuesFrom,{'http://example.com/father#markus'}
+∃ hasChild⁻.{stefan ⊔ markus ⊔ anna},OWLObjectSomeValuesFrom,"{'http://example.com/father#markus', 'http://example.com/father#heinz', 'http://example.com/father#anna'}"
+∃ hasChild.{martin ⊔ michelle ⊔ anna},OWLObjectSomeValuesFrom,{'http://example.com/father#markus'}
+¬person,OWLObjectComplementOf,set()
+≥ 1 hasChild.(¬person),OWLObjectMinCardinality,set()
+∃ hasChild⁻.{stefan ⊔ martin ⊔ heinz},OWLObjectSomeValuesFrom,"{'http://example.com/father#markus', 'http://example.com/father#heinz'}"
+person ⊓ person,OWLObjectIntersectionOf,"{'http://example.com/father#markus', 'http://example.com/father#anna', 'http://example.com/father#martin', 'http://example.com/father#stefan', 'http://example.com/father#michelle', 'http://example.com/father#heinz'}"
+∃ hasChild⁻.{martin ⊔ anna ⊔ heinz},OWLObjectSomeValuesFrom,{'http://example.com/father#heinz'}
+≤ 3 hasChild⁻.person,OWLObjectMaxCardinality,"{'http://example.com/father#markus', 'http://example.com/father#anna', 'http://example.com/father#martin', 'http://example.com/father#stefan', 'http://example.com/father#michelle', 'http://example.com/father#heinz'}"
+≤ 1 hasChild⁻.(¬person),OWLObjectMaxCardinality,"{'http://example.com/father#markus', 'http://example.com/father#anna', 'http://example.com/father#martin', 'http://example.com/father#stefan', 'http://example.com/father#michelle', 'http://example.com/father#heinz'}"
+≤ 2 hasChild⁻.(¬person),OWLObjectMaxCardinality,"{'http://example.com/father#markus', 'http://example.com/father#anna', 'http://example.com/father#martin', 'http://example.com/father#stefan', 'http://example.com/father#michelle', 'http://example.com/father#heinz'}"
+∃ hasChild.{stefan ⊔ martin ⊔ anna},OWLObjectSomeValuesFrom,{'http://example.com/father#markus'}
+person,OWLClass,"{'http://example.com/father#markus', 'http://example.com/father#anna', 'http://example.com/father#martin', 'http://example.com/father#stefan', 'http://example.com/father#michelle', 'http://example.com/father#heinz'}"
+∃ hasChild⁻.{stefan ⊔ martin ⊔ michelle},OWLObjectSomeValuesFrom,"{'http://example.com/father#markus', 'http://example.com/father#heinz'}"
+∃ hasChild⁻.{michelle ⊔ anna ⊔ heinz},OWLObjectSomeValuesFrom,{'http://example.com/father#heinz'}
+person ⊔ person,OWLObjectUnionOf,"{'http://example.com/father#markus', 'http://example.com/father#anna', 'http://example.com/father#martin', 'http://example.com/father#stefan', 'http://example.com/father#michelle', 'http://example.com/father#heinz'}"
+∃ hasChild⁻.{martin ⊔ michelle ⊔ anna},OWLObjectSomeValuesFrom,{'http://example.com/father#heinz'}
+∀ hasChild.(¬person),OWLObjectAllValuesFrom,"{'http://example.com/father#heinz', 'http://example.com/father#michelle'}"
+≥ 3 hasChild.person,OWLObjectMinCardinality,set()
+∃ hasChild.{michelle ⊔ anna ⊔ heinz},OWLObjectSomeValuesFrom,"{'http://example.com/father#markus', 'http://example.com/father#martin', 'http://example.com/father#anna'}"
+∃ hasChild.{markus ⊔ stefan ⊔ michelle},OWLObjectSomeValuesFrom,{'http://example.com/father#stefan'}
+∃ hasChild.{stefan ⊔ markus ⊔ anna},OWLObjectSomeValuesFrom,"{'http://example.com/father#markus', 'http://example.com/father#stefan'}"
+∃ hasChild⁻.{martin ⊔ markus ⊔ anna},OWLObjectSomeValuesFrom,"{'http://example.com/father#anna', 'http://example.com/father#heinz'}"
+∀ hasChild.person,OWLObjectAllValuesFrom,"{'http://example.com/father#markus', 'http://example.com/father#anna', 'http://example.com/father#martin', 'http://example.com/father#stefan', 'http://example.com/father#michelle', 'http://example.com/father#heinz'}"
+≤ 2 hasChild.person,OWLObjectMaxCardinality,"{'http://example.com/father#markus', 'http://example.com/father#anna', 'http://example.com/father#martin', 'http://example.com/father#stefan', 'http://example.com/father#michelle', 'http://example.com/father#heinz'}"
+∃ hasChild.person,OWLObjectSomeValuesFrom,"{'http://example.com/father#markus', 'http://example.com/father#martin', 'http://example.com/father#stefan', 'http://example.com/father#anna'}"
+(¬male) ⊔ (¬male),OWLObjectUnionOf,"{'http://example.com/father#michelle', 'http://example.com/father#anna'}"
+male ⊓ person,OWLObjectIntersectionOf,"{'http://example.com/father#markus', 'http://example.com/father#stefan', 'http://example.com/father#heinz', 'http://example.com/father#martin'}"
+male ⊔ (¬female),OWLObjectUnionOf,"{'http://example.com/father#markus', 'http://example.com/father#stefan', 'http://example.com/father#heinz', 'http://example.com/father#martin'}"
+female ⊔ female,OWLObjectUnionOf,"{'http://example.com/father#michelle', 'http://example.com/father#anna'}"
+male,OWLClass,"{'http://example.com/father#markus', 'http://example.com/father#stefan', 'http://example.com/father#heinz', 'http://example.com/father#martin'}"
+(¬male) ⊓ (¬male),OWLObjectIntersectionOf,"{'http://example.com/father#michelle', 'http://example.com/father#anna'}"
+(¬male) ⊔ person,OWLObjectUnionOf,"{'http://example.com/father#markus', 'http://example.com/father#heinz', 'http://example.com/father#anna', 'http://example.com/father#michelle', 'http://example.com/father#stefan', 'http://example.com/father#martin'}"
+(¬female) ⊔ (¬male),OWLObjectUnionOf,"{'http://example.com/father#markus', 'http://example.com/father#heinz', 'http://example.com/father#anna', 'http://example.com/father#michelle', 'http://example.com/father#stefan', 'http://example.com/father#martin'}"
+(¬male) ⊔ (¬female),OWLObjectUnionOf,"{'http://example.com/father#markus', 'http://example.com/father#heinz', 'http://example.com/father#anna', 'http://example.com/father#michelle', 'http://example.com/father#stefan', 'http://example.com/father#martin'}"
+male ⊔ (¬person),OWLObjectUnionOf,"{'http://example.com/father#markus', 'http://example.com/father#stefan', 'http://example.com/father#heinz', 'http://example.com/father#martin'}"
+male ⊓ male,OWLObjectIntersectionOf,"{'http://example.com/father#markus', 'http://example.com/father#stefan', 'http://example.com/father#heinz', 'http://example.com/father#martin'}"
+male ⊔ person,OWLObjectUnionOf,"{'http://example.com/father#markus', 'http://example.com/father#heinz', 'http://example.com/father#anna', 'http://example.com/father#michelle', 'http://example.com/father#stefan', 'http://example.com/father#martin'}"
+¬male,OWLObjectComplementOf,"{'http://example.com/father#michelle', 'http://example.com/father#anna'}"
+¬female,OWLObjectComplementOf,"{'http://example.com/father#markus', 'http://example.com/father#stefan', 'http://example.com/father#heinz', 'http://example.com/father#martin'}"
+person ⊔ female,OWLObjectUnionOf,"{'http://example.com/father#markus', 'http://example.com/father#heinz', 'http://example.com/father#anna', 'http://example.com/father#michelle', 'http://example.com/father#stefan', 'http://example.com/father#martin'}"
+person ⊓ (¬male),OWLObjectIntersectionOf,"{'http://example.com/father#michelle', 'http://example.com/father#anna'}"
+(¬person) ⊔ male,OWLObjectUnionOf,"{'http://example.com/father#markus', 'http://example.com/father#stefan', 'http://example.com/father#heinz', 'http://example.com/father#martin'}"
+person ⊓ male,OWLObjectIntersectionOf,"{'http://example.com/father#markus', 'http://example.com/father#stefan', 'http://example.com/father#heinz', 'http://example.com/father#martin'}"
+male ⊔ male,OWLObjectUnionOf,"{'http://example.com/father#markus', 'http://example.com/father#stefan', 'http://example.com/father#heinz', 'http://example.com/father#martin'}"
+person ⊔ (¬female),OWLObjectUnionOf,"{'http://example.com/father#markus', 'http://example.com/father#heinz', 'http://example.com/father#anna', 'http://example.com/father#michelle', 'http://example.com/father#stefan', 'http://example.com/father#martin'}"
+(¬male) ⊔ (¬person),OWLObjectUnionOf,"{'http://example.com/father#michelle', 'http://example.com/father#anna'}"
+person ⊔ male,OWLObjectUnionOf,"{'http://example.com/father#markus', 'http://example.com/father#heinz', 'http://example.com/father#anna', 'http://example.com/father#michelle', 'http://example.com/father#stefan', 'http://example.com/father#martin'}"
+male ⊓ (¬female),OWLObjectIntersectionOf,"{'http://example.com/father#markus', 'http://example.com/father#stefan', 'http://example.com/father#heinz', 'http://example.com/father#martin'}"
+(¬female) ⊓ person,OWLObjectIntersectionOf,"{'http://example.com/father#markus', 'http://example.com/father#stefan', 'http://example.com/father#heinz', 'http://example.com/father#martin'}"
+female ⊔ person,OWLObjectUnionOf,"{'http://example.com/father#markus', 'http://example.com/father#heinz', 'http://example.com/father#anna', 'http://example.com/father#michelle', 'http://example.com/father#stefan', 'http://example.com/father#martin'}"
+(¬female) ⊔ male,OWLObjectUnionOf,"{'http://example.com/father#markus', 'http://example.com/father#stefan', 'http://example.com/father#heinz', 'http://example.com/father#martin'}"
+female ⊔ (¬person),OWLObjectUnionOf,"{'http://example.com/father#michelle', 'http://example.com/father#anna'}"
+(¬male) ⊓ person,OWLObjectIntersectionOf,"{'http://example.com/father#michelle', 'http://example.com/father#anna'}"
+person ⊓ (¬female),OWLObjectIntersectionOf,"{'http://example.com/father#markus', 'http://example.com/father#stefan', 'http://example.com/father#heinz', 'http://example.com/father#martin'}"
+(¬male) ⊔ male,OWLObjectUnionOf,"{'http://example.com/father#markus', 'http://example.com/father#heinz', 'http://example.com/father#anna', 'http://example.com/father#michelle', 'http://example.com/father#stefan', 'http://example.com/father#martin'}"
+(¬female) ⊔ female,OWLObjectUnionOf,"{'http://example.com/father#markus', 'http://example.com/father#heinz', 'http://example.com/father#anna', 'http://example.com/father#michelle', 'http://example.com/father#stefan', 'http://example.com/father#martin'}"
+(¬female) ⊓ male,OWLObjectIntersectionOf,"{'http://example.com/father#markus', 'http://example.com/father#stefan', 'http://example.com/father#heinz', 'http://example.com/father#martin'}"
+(¬female) ⊓ (¬female),OWLObjectIntersectionOf,"{'http://example.com/father#markus', 'http://example.com/father#stefan', 'http://example.com/father#heinz', 'http://example.com/father#martin'}"
+(¬female) ⊔ person,OWLObjectUnionOf,"{'http://example.com/father#markus', 'http://example.com/father#heinz', 'http://example.com/father#anna', 'http://example.com/father#michelle', 'http://example.com/father#stefan', 'http://example.com/father#martin'}"
+female,OWLClass,"{'http://example.com/father#michelle', 'http://example.com/father#anna'}"
+female ⊓ female,OWLObjectIntersectionOf,"{'http://example.com/father#michelle', 'http://example.com/father#anna'}"
+(¬female) ⊔ (¬female),OWLObjectUnionOf,"{'http://example.com/father#markus', 'http://example.com/father#stefan', 'http://example.com/father#heinz', 'http://example.com/father#martin'}"
+(¬female) ⊔ (¬person),OWLObjectUnionOf,"{'http://example.com/father#markus', 'http://example.com/father#stefan', 'http://example.com/father#heinz', 'http://example.com/father#martin'}"
+(¬male) ⊔ female,OWLObjectUnionOf,"{'http://example.com/father#michelle', 'http://example.com/father#anna'}"
+female ⊓ person,OWLObjectIntersectionOf,"{'http://example.com/father#michelle', 'http://example.com/father#anna'}"
+(¬person) ⊔ (¬female),OWLObjectUnionOf,"{'http://example.com/father#markus', 'http://example.com/father#stefan', 'http://example.com/father#heinz', 'http://example.com/father#martin'}"
+person ⊔ (¬male),OWLObjectUnionOf,"{'http://example.com/father#markus', 'http://example.com/father#heinz', 'http://example.com/father#anna', 'http://example.com/father#michelle', 'http://example.com/father#stefan', 'http://example.com/father#martin'}"
+male ⊔ female,OWLObjectUnionOf,"{'http://example.com/father#markus', 'http://example.com/father#heinz', 'http://example.com/father#anna', 'http://example.com/father#michelle', 'http://example.com/father#stefan', 'http://example.com/father#martin'}"
+female ⊓ (¬male),OWLObjectIntersectionOf,"{'http://example.com/father#michelle', 'http://example.com/father#anna'}"
+(¬male) ⊓ female,OWLObjectIntersectionOf,"{'http://example.com/father#michelle', 'http://example.com/father#anna'}"
+person ⊓ female,OWLObjectIntersectionOf,"{'http://example.com/father#michelle', 'http://example.com/father#anna'}"
+female ⊔ (¬male),OWLObjectUnionOf,"{'http://example.com/father#michelle', 'http://example.com/father#anna'}"
+(¬person) ⊔ female,OWLObjectUnionOf,"{'http://example.com/father#michelle', 'http://example.com/father#anna'}"
+(¬person) ⊔ (¬male),OWLObjectUnionOf,"{'http://example.com/father#michelle', 'http://example.com/father#anna'}"
+female ⊔ male,OWLObjectUnionOf,"{'http://example.com/father#markus', 'http://example.com/father#heinz', 'http://example.com/father#anna', 'http://example.com/father#michelle', 'http://example.com/father#stefan', 'http://example.com/father#martin'}"
