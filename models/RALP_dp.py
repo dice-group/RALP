@@ -129,7 +129,6 @@ class MultiLabelLinkPredictor(dspy.Module):
 
 
 class RALP(AbstractBaseLinkPredictorClass):
-    Ensemble approach combining multiple prediction strategies"""
 
     def __init__(self, knowledge_graph, base_url, api_key, temperature, seed, llm_model, use_val: bool = False):
         super().__init__(knowledge_graph, name="RALP")
