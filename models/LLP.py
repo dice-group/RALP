@@ -194,12 +194,12 @@ class LLP:
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--kg_path", type=str, default="../../KGs/LitWD1K")
+    parser.add_argument("--kg_path", type=str, default="KGs/LitWD1K")
     parser.add_argument("--base_url", type=str, default=None)
     parser.add_argument("--api_key", type=str, default=None)
     parser.add_argument("--temperature", type=float, default=0.1)
     parser.add_argument("--seed", type=int, default=42)
-    parser.add_argument("--llm_model", type=str, default="tentris")
+    parser.add_argument("--llm_model", type=str, default=None)
     args = parser.parse_args()
     if args.api_key is None:
         args.api_key = os.environ.get("TOKEN")

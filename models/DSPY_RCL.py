@@ -49,7 +49,7 @@ class DSPy_RCL(AbstractBaseLinkPredictorClass):
         self.exclude_source = exclude_source
         # hardcoded for now
         self.lm = dspy.LM(
-            model="openai/tentris", api_key=self.api_key, base_url=self.base_url, cache=False
+            model=None, api_key=self.api_key, base_url=self.base_url, cache=False
         )
         dspy.configure(lm=self.lm)
         self.model = dspy.ChainOfThought(LM_Call_Signature, max_tokens=4000)
