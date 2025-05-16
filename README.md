@@ -34,3 +34,30 @@ To generate predictions for numerical literals:
 python -m LLP.py --kg_path KGs/LitWD1K --base_url http://some_llm_endpoint.com --temperature 0.1 --seed 42 --llm_model model_name
 ```
 
+## OWL Reasoning / Instance Retrieval
+
+For manchester syntax and triples represented using full IRI:
+```aiignore
+python -m IRLLM.py --kg_path KGs/Father/father.owl --base_url http://some_llm_endpoint.com --temperature 0.1 --seed 42 --llm_model model_name --output_csv_path IR_results_m.csv --expression_language manchester 
+```
+
+For manchester syntax and triples represented using IRI without namespace:
+
+```aiignore
+python -m IRLLM.py --kg_path KGs/Father/father.owl --base_url http://some_llm_endpoint.com --temperature 0.1 --seed 42 --llm_model model_name --output_csv_path IR_results_m.csv --expression_language manchester --triple_without_namespace
+```
+
+For DL syntax and triples represented using full IRI:
+
+```aiignore
+python -m IRLLM.py --kg_path KGs/Father/father.owl --base_url http://some_llm_endpoint.com --temperature 0.1 --seed 42 --llm_model model_name --output_csv_path IR_results_m.csv --expression_language dl
+```
+
+For DL syntax and triples represented using IRI without namespace:
+
+```aiignore
+python -m IRLLM.py --kg_path KGs/Father/father.owl --base_url http://some_llm_endpoint.com --temperature 0.1 --seed 42 --llm_model model_name --output_csv_path IR_results_m.csv --expression_language dl --triple_without_namespace
+```
+
+Note: We tried to run this commands multiple time and sometime we get different results. We attribute this to the difference in 
+few-shot examples that are generated and the LLM temperature.
