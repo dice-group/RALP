@@ -2,8 +2,6 @@ from random import shuffle
 
 import requests
 
-
-
 def get_wikidata_label(entity_id, language="en"):
     url = "https://www.wikidata.org/w/api.php"
     params = {
@@ -40,14 +38,13 @@ d = int(len(triples)/10)
 
 shuffle(triples)
 a = triples
-# with open("../KGs/LitWD1K/numerical_literals_train.txt", "w") as f:
-with open("../KGs/LitWD1K/numerical_literals_test.txt", "w") as f2:
+
+with open("KGs/LitWD1K/numerical_literals_test.txt", "w") as f2:
     for i in range(d):
         f2.write(a[i])
         triples.pop(i)
 
-with open("../KGs/LitWD1K/numerical_literals_train.txt", "w") as f1:
+with open("KGs/LitWD1K/numerical_literals_train.txt", "w") as f1:
     for line in triples:
         f1.write(line)
 
-# print(translate_line("namibia	inflation_rate_1	0.073"))

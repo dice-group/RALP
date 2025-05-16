@@ -13,7 +13,7 @@ load_dotenv()
 
 class StaticRALP(AbstractBaseLinkPredictorClass):
     def __init__(self,knowledge_graph, base_url,api_key,temperature, seed,llm_model,use_val:bool=False):
-        super().__init__(knowledge_graph,name="Demir")
+        super().__init__(knowledge_graph,name="static_ralp")
         self.temperature = temperature
         self.seed = seed
         self.lm = dspy.LM(model=f"openai/{llm_model}", api_key=api_key,

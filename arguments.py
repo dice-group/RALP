@@ -5,7 +5,7 @@ parser.add_argument("--model", type=str, default="RALP", help="Model name to use
                     choices=["GCL", "RCL", "RALP"])
 parser.add_argument("--base_url", type=str, default=None,
                     help="Base URL for the OpenAI client.")
-parser.add_argument("--llm_model_name", type=str, default="tentris", help="Model name of the LLM to use.")
+parser.add_argument("--llm_model_name", type=str, default=None, help="Model name of the LLM to use.")
 parser.add_argument("--temperature", type=float, default=0.0, help="Temperature hyperparameter for LLM calls.")
 parser.add_argument("--api_key", type=str, default=None, help="API key for the OpenAI client. If left to None, "
                                                               "it will look at the environment variable named "

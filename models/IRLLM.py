@@ -436,9 +436,9 @@ class IRLLM:
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Instance Retrieval via LLM")
-    parser.add_argument("--kg_path", type=str, default="/home/alkid/PycharmProjects/dice-embeddings/KGs/Family/father.owl",
+    parser.add_argument("--kg_path", type=str, default="KGs/Father/father.owl",
                         help="Path to the knowledge graph file (e.g., in OWL/XML format).")
-    parser.add_argument("--base_url", type=str, default="http://harebell.cs.upb.de:8501/v1",
+    parser.add_argument("--base_url", type=str, default=None,
                         help="Base URL for the LLM API (e.g., OpenAI compatible endpoint).")
     parser.add_argument("--api_key", type=str, default=None,
                         help="API key for the LLM. Can also be provided via TOKEN environment variable.")
@@ -446,7 +446,7 @@ if __name__ == "__main__":
                         help="Temperature setting for the LLM (controls randomness).")
     parser.add_argument("--seed", type=int, default=42,
                         help="Seed for the LLM (for reproducibility if the LLM supports it).")
-    parser.add_argument("--llm_model", type=str, default="tentris",
+    parser.add_argument("--llm_model", type=str, default=None,
                         help="The name or identifier of the LLM model to use.")
     parser.add_argument("--results_csv_path", type=str, default="ALCQHI_Retrieval_Results.csv",
                         help="Path to the CSV file containing ground truth DL expressions and instances.")

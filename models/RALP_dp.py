@@ -129,7 +129,6 @@ class MultiLabelLinkPredictor(dspy.Module):
 
 
 class RALP(AbstractBaseLinkPredictorClass):
-    """Retrieval-Augmented Link Prediction (ex DemirEnsemble).
     Ensemble approach combining multiple prediction strategies"""
 
     def __init__(self, knowledge_graph, base_url, api_key, temperature, seed, llm_model, use_val: bool = False):

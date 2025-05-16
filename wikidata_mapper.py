@@ -1,7 +1,5 @@
 import requests
 
-
-
 def get_wikidata_label(entity_id, language="en"):
     url = "https://www.wikidata.org/w/api.php"
     params = {
@@ -36,8 +34,6 @@ def translate_line(line: str):
             return
     subject_label = subject_label.lower().replace(" ", "_")
     predicate_label = get_wikidata_label(predicate_id).lower().replace(" ", "_")
-    # predicate_quantity_label = get_wikidata_label(predicate_quantity_id).lower().replace(" ", "_")
-    # object_label = re.search(r'"[\+\-]?([0-9]+\.[0-9]+)"', object).group(1)
     if "dateTime" in object:
         object_label = object.split('"')[1]
     else:
@@ -45,7 +41,7 @@ def translate_line(line: str):
 
     return subject_label + "\t" + predicate_label + "_" + predicate_quantity_label + "\t" + object_label + "\n"
 
-with open("../KGs/LitWD1K/numeric_literals2.txt", "r") as f:
-    with open("../KGs/LitWD1K/numeric_literals_translated.txt", "a") as f2:
+with open("KGs/LitWD1K/numeric_literals2.txt", "r") as f:
+    with open("KGs/LitWD1K/numeric_literals_translated.txt", "a") as f2:
         for line in f:
             f2.write(translate_line(line))

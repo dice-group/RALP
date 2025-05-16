@@ -1,7 +1,3 @@
-"""
-incomplete
-/home/cdemir/anaconda3/envs/dice/bin/python /home/cdemir/Desktop/Softwares/dice-embeddings/retrieval_aug_predictors/models/retrieval_results.py
-"""
 from ontolearn.knowledge_base import KnowledgeBase
 from ontolearn.utils import jaccard_similarity, f1_set_similarity, concept_reducer, concept_reducer_properties
 from owlapy.class_expression import (
@@ -204,7 +200,7 @@ def execute(args):
 
 def get_default_arguments():
     parser = ArgumentParser()
-    parser.add_argument("--path_kg", type=str, default="/home/cdemir/Desktop/Softwares/Ontolearn/KGs/Family/father.owl")
+    parser.add_argument("--path_kg", type=str, default="KGs/Father/father.owl")
     parser.add_argument("--path_kge_model", type=str, default=None)
     parser.add_argument("--endpoint_triple_store", type=str, default=None)
     parser.add_argument("--gamma", type=float, default=0.9)

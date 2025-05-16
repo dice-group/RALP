@@ -265,7 +265,7 @@ class MultiLabelLinkPredictor(dspy.Module):
             for idx, score in enumerate(scores.target):
                 entity = retrieved_entities.target[idx]
                 intermediate_predictions.setdefault(entity, []).append(score)
-        # Avg scores of intermediate predictions. @TODO: CD: Is there any better way ?!
+        # Avg scores of intermediate predictions.
         predictions=dict()
         for k,v in intermediate_predictions.items():
             predictions[k]=sum(v)/len(v)
@@ -275,7 +275,6 @@ class MultiLabelLinkPredictor(dspy.Module):
 
 class RALP_MPRO(AbstractBaseLinkPredictorClass):
     """
-    (ex DemirEnsembleMPRO)
     Ensemble predictor using MIPROv2 optimized base prompts.
     Combines predictions from models trained/optimized with different settings (e.g., temperature).
     """
@@ -316,7 +315,6 @@ class RALP_MPRO(AbstractBaseLinkPredictorClass):
             print(f"\n--- Optimizing/Loading Predictor for Temperature: {temp:.1f} ---")
             dataset_name=self.kg.dataset_dir.split("/")[-1]
             save_filename = os.path.join(self.save_dir, f"{dataset_name}_predictor_temp_{temp:.1f}.json")
-            # @TODO: CD: Later, save the details eval results as csv controlled by a flag attribute.
             results_filename = os.path.join(self.save_dir, f"eval_results_temp_{temp:.1f}.csv")
             # Initialize the base predictor for this temperature
             base_predictor = MultiLabelLinkPredictor(entities=list(self.all_entities),
@@ -428,7 +426,6 @@ class RALP_MPRO(AbstractBaseLinkPredictorClass):
         """
         num_entities = len(self.idx_to_entity)
 
-        # TODO: AB: Why do we config this LM if we already have configured LM for each predictor in self.predictors?
         lm = dspy.LM(model=f"openai/{self.llm_model}", api_key=self.api_key, api_base=self.base_url,
                      seed=self.seed, temperature=self.mipro_optimizer_temperature,
                      cache=True, cache_in_memory=True)
