@@ -19,84 +19,82 @@ from owlapy import owl_expression_to_manchester, dl_to_owl_expression
 # Load environment variables from a .env file
 load_dotenv()
 
-# (Keep the Classifier, Verbaliser, and PredictionModule classes as they were)
-class Classifier(dspy.Signature):
-    """Classifies entities in a knowledge graph based on a natural language concept."""
-    graph: str = dspy.InputField(desc="All triples in the knowledge graph. Entities and relations include their namespace.")
-    concept: str = dspy.InputField(desc="A concept or class in natural language.")
-    classified_entities: List[str] = dspy.OutputField(desc="All the entities from the knowledge graph that can be classified by the given concept or class. Result must be a list of unique entities.")
+# class Classifier(dspy.Signature):
+#     """Classifies entities in a knowledge graph based on a natural language concept."""
+#     graph: str = dspy.InputField(desc="All triples in the knowledge graph. Entities and relations include their namespace.")
+#     concept: str = dspy.InputField(desc="A concept or class in natural language.")
+#     classified_entities: List[str] = dspy.OutputField(desc="All the entities from the knowledge graph that can be classified by the given concept or class. Result must be a list of unique entities.")
+#
+# class Verbaliser(dspy.Signature):
+#     """Verbalises a description logic expression into natural language."""
+#     expression: str = dspy.InputField(desc="An expression in description logics. Example: ∃ hasChild.{markus} --> There exist a named individual who has child and this child is Markus")
+#     verbalisation: str = dspy.OutputField(desc="A concise verbalisation of the expression in natural language.")
+#
+# class Classifier2(dspy.Signature):
+#     graph: str = dspy.InputField(desc="All triples in the knowledge graph. Entities and relations are represented as an IRI, so they include their namespace.")
+#     concept: str = dspy.InputField(desc="A concept in description logics which are a family of formal knowledge representation languages.")
+#     classified_entities: List[str] = dspy.OutputField(desc="Every entity on the provided knowledge graph that can be classified by the given concept. Result must be a list of unique entities.")
+#
+# class Classifier3(dspy.Signature):
+#     graph: str = dspy.InputField(desc="All triples in the knowledge graph.")
+#     concept: str = dspy.InputField(desc="A concept in Manchester syntax.")
+#     classified_entities: List[str] = dspy.OutputField(desc="Every entity on the provided knowledge graph that can be classified by the given concept Result must be a list of unique entities.")
 
-class Verbaliser(dspy.Signature):
-    """Verbalises a description logic expression into natural language."""
-    expression: str = dspy.InputField(desc="An expression in description logics. Example: ∃ hasChild.{markus} --> There exist a named individual who has child and this child is Markus")
-    verbalisation: str = dspy.OutputField(desc="A concise verbalisation of the expression in natural language.")
+# class Classifier4(dspy.Signature):
+#     graph: str = dspy.InputField(desc="All triples in the knowledge graph.Entities and relations are represented as an IRI, so they include their namespace")
+#     concept: str = dspy.InputField(desc="A concept in Manchester syntax.")
+#     examples: str = dspy.InputField(desc="Few-shot examples on this task.")
+#     classified_entities: List[str] = dspy.OutputField(desc="Every entity on the provided knowledge graph that can be classified by the given concept Result must be a list of unique entities.")
 
-class Classifier2(dspy.Signature):
-    graph: str = dspy.InputField(desc="All triples in the knowledge graph. Entities and relations are represented as an IRI, so they include their namespace.")
-    concept: str = dspy.InputField(desc="A concept in description logics which are a family of formal knowledge representation languages.")
-    classified_entities: List[str] = dspy.OutputField(desc="Every entity on the provided knowledge graph that can be classified by the given concept. Result must be a list of unique entities.")
+# class Examples(dspy.Signature):
+#     expression: str = dspy.InputField(desc="An expression in manchester syntax.")
+#     syntax: str = dspy.InputField(desc="An explanation of the syntax used in the given expression")
+#     expected_result = dspy.InputField(desc="The set of true values for the given expression.")
+#     graph: str = dspy.InputField(desc = "All triples in the knowledge graph. Entities and relations are represented as an IRI, so they include their namespace")
+#     example: str = dspy.OutputField(desc="An example that shows the way an LLM should reason in chain of thought fashion to reach the expected result from the given expression using information in the graph. Include the expression and the result in the example as well.")
+#
 
-class Classifier3(dspy.Signature):
-    graph: str = dspy.InputField(desc="All triples in the knowledge graph.")
-    concept: str = dspy.InputField(desc="A concept in Manchester syntax.")
-    classified_entities: List[str] = dspy.OutputField(desc="Every entity on the provided knowledge graph that can be classified by the given concept Result must be a list of unique entities.")
+# class PredictionModuleWithExamples(dspy.Module):
+#     def __init__(self):
+#         super().__init__()
+#         self.example_generator = dspy.Predict(Examples)
+#         self.classifier = dspy.ChainOfThought(Classifier4)
+#
+#     def forward(self, graph: str, expression: str, true_set) -> List[str]:
+#         single_example = self.example_generator(expression=expression, expected_result=true_set, graph= graph).example
+#         print(single_example)
+#         predicted_instances = self.classifier(graph=graph, concept=expression, example= single_example)
+#         print(predicted_instances)
+#         predicted_instances = predicted_instances.classified_entities
+#
+#         return predicted_instances
+#
+# class PredictionModuleWithVerbalisation(dspy.Module):
+#     """A module that verbalises a DL expression and then classifies entities using the verbalisation."""
+#     def __init__(self):
+#         super().__init__()
+#         # Use dspy.Predict for simple signature execution
+#         self.verbaliser = dspy.Predict(Verbaliser)
+#         # Use dspy.ChainOfThought for multi-step reasoning in classification
+#         self.classifier = dspy.ChainOfThought(Classifier)
 
-class Classifier4(dspy.Signature):
-    graph: str = dspy.InputField(desc="All triples in the knowledge graph.Entities and relations are represented as an IRI, so they include their namespace")
-    concept: str = dspy.InputField(desc="A concept in Manchester syntax.")
-    examples: str = dspy.InputField(desc="Few-shot examples on this task.")
-    classified_entities: List[str] = dspy.OutputField(desc="Every entity on the provided knowledge graph that can be classified by the given concept Result must be a list of unique entities.")
-
-class Examples(dspy.Signature):
-    expression: str = dspy.InputField(desc="An expression in manchester syntax.")
-    syntax: str = dspy.InputField(desc="An explanation of the syntax used in the given expression")
-    expected_result = dspy.InputField(desc="The set of true values for the given expression.")
-    graph: str = dspy.InputField(desc = "All triples in the knowledge graph. Entities and relations are represented as an IRI, so they include their namespace")
-    example: str = dspy.OutputField(desc="An example that shows the way an LLM should reason in chain of thought fashion to reach the expected result from the given expression using information in the graph. Include the expression and the result in the example as well.")
-
-
-
-class PredictionModuleWithExamples(dspy.Module):
-    def __init__(self):
-        super().__init__()
-        self.example_generator = dspy.Predict(Examples)
-        self.classifier = dspy.ChainOfThought(Classifier4)
-
-    def forward(self, graph: str, expression: str, true_set) -> List[str]:
-        single_example = self.example_generator(expression=expression, expected_result=true_set, graph= graph).example
-        print(single_example)
-        predicted_instances = self.classifier(graph=graph, concept=expression, example= single_example)
-        print(predicted_instances)
-        predicted_instances = predicted_instances.classified_entities
-
-        return predicted_instances
-
-class PredictionModuleWithVerbalisation(dspy.Module):
-    """A module that verbalises a DL expression and then classifies entities using the verbalisation."""
-    def __init__(self):
-        super().__init__()
-        # Use dspy.Predict for simple signature execution
-        self.verbaliser = dspy.Predict(Verbaliser)
-        # Use dspy.ChainOfThought for multi-step reasoning in classification
-        self.classifier = dspy.ChainOfThought(Classifier)
-
-    def forward(self, graph: str, dl_expression: str) -> List[str]:
-        """
-        Verbalises a DL expression and uses the verbalisation to classify entities in a graph.
-
-        Args:
-            graph: The knowledge graph as a string of triples.
-            dl_expression: The description logic expression.
-
-        Returns:
-            A list of entities classified by the verbalised concept.
-        """
-        # Verbalise the description logic expression
-        verbalized_concept = self.verbaliser(expression=dl_expression).verbalisation
-        # Classify entities in the graph based on the verbalised concept
-        predicted_instances = self.classifier(graph=graph, concept=verbalized_concept).classified_entities
-
-        return predicted_instances
+    # def forward(self, graph: str, dl_expression: str) -> List[str]:
+    #     """
+    #     Verbalises a DL expression and uses the verbalisation to classify entities in a graph.
+    #
+    #     Args:
+    #         graph: The knowledge graph as a string of triples.
+    #         dl_expression: The description logic expression.
+    #
+    #     Returns:
+    #         A list of entities classified by the verbalised concept.
+    #     """
+    #     # Verbalise the description logic expression
+    #     verbalized_concept = self.verbaliser(expression=dl_expression).verbalisation
+    #     # Classify entities in the graph based on the verbalised concept
+    #     predicted_instances = self.classifier(graph=graph, concept=verbalized_concept).classified_entities
+    #
+    #     return predicted_instances
 
 # (Keep the IRLLM class __init__ and _load_knowledge_graph methods as they were)
 class IRLLM:
@@ -106,7 +104,8 @@ class IRLLM:
     Handles loading the knowledge graph, configuring the LLM, and evaluating
     the LLM's ability to retrieve instances for given concepts.
     """
-    def __init__(self, kg_path: str, base_url: str, api_key: str, temperature: float, seed: int, llm_model: str):
+    def __init__(self, kg_path: str, base_url: str, api_key: str, temperature: float, seed: int, llm_model: str,
+                 expression_language:str, triple_without_namespace:bool):
         """
         Initializes the IRLLM with KG path and LLM configuration.
 
@@ -136,6 +135,8 @@ class IRLLM:
         self._load_knowledge_graph()
         manager = OntologyManager()
         self.ontology = manager.load_ontology(self.kg_path)
+        self.expression_language = expression_language
+        self.triple_without_namespace = triple_without_namespace
 
     def _load_knowledge_graph(self):
         """Loads the knowledge graph from the specified path."""
@@ -163,8 +164,10 @@ class IRLLM:
             print(f"An unexpected error occurred while parsing {self.kg_path}: {e}", file=sys.stderr)
             sys.exit(1)
 
-
-        self.triples = [f"{str(s)} {str(p)} {str(o)}" for s, p, o in g]
+        if self.triple_without_namespace:
+            self.triples = [f"{self.strip_namespaces(s)} {self.strip_namespaces(p)} {self.strip_namespaces(o)}" for s, p, o in g]
+        else:
+            self.triples = [f"{str(s)} {str(p)} {str(o)}" for s, p, o in g]
         print(f"Successfully loaded {len(self.triples)} triples from {self.kg_path}")
 
     def strip_namespaces(self, term):
@@ -174,7 +177,7 @@ class IRLLM:
                 return term_str.replace(ns, "")
         return term_str
 
-    def evaluate(self, results_csv_path: str = "ALCQHI_Retrieval_Results.csv", output_csv_path: str = "Results.csv"):
+    def evaluate(self, results_csv_path: str = "ALCQHI_Retrieval_Results.csv", output_csv_path: str = "IRLLM_Results.csv"):
         """
         Evaluates the LLM's instance retrieval performance against a ground truth CSV.
 
@@ -200,43 +203,118 @@ class IRLLM:
             sys.exit(1)
 
 
-        examples_generator = dspy.Predict(Examples)
-        syntax = """Manchester Syntax is a user-friendly, text-based format for writing OWL (Web Ontology Language) 
-        class expressions. It's designed to be more readable than XML or RDF serializations. It's commonly used in tools
-        like Protégé to define logical descriptions of concepts in an ontology.
+        expression_desc = "An concept expression in manchester syntax." if self.expression_language=="manchester" else "An concept expression in description logics syntax."
+        graph_desc = "All triples in the knowledge graph."
+        if not self.triple_without_namespace:
+            graph_desc += " Entities and relations are represented as an IRI, so they include their namespace."
 
-        Key Features:
-        Classes, properties, and individuals are written by name.
-        
-        Logical operators are written in a readable way:
-        
-        and for intersection (⊓)
-        
-        or for union (⊔)
-        
-        not for negation (¬)
-        
-        Property restrictions use natural language-like constructs:
-        
-        some for existential quantification (∃)
-        
-        only for universal quantification (∀)
-        
-        Examples:
-        Person and (hasChild some Doctor)
-        
-        A person who has at least one child who is a doctor.
-        
-        Animal and (hasPart only Leg)
-        
-        An animal all of whose parts are legs.
-        """
-        example_ce_result = {"hasChild some {markus , michelle , anna}": ['http://example.com/father#markus',
-                                                                          'http://example.com/father#stefan'],
-                             "hasChild min 1 person": ['http://example.com/father#markus',
-                                                       'http://example.com/father#martin',
-                                                       'http://example.com/father#anna',
-                                                       'http://example.com/father#stefan']}
+        class Examples(dspy.Signature):
+            expression: str = dspy.InputField(desc=expression_desc)
+            syntax: str = dspy.InputField(desc="An explanation of the syntax used in the given expression")
+            expected_result = dspy.InputField(desc="The set of true values for the given expression.")
+            graph: str = dspy.InputField(desc=graph_desc)
+            example: str = dspy.OutputField(
+                desc="An example that shows the way an LLM should reason in chain of thought fashion to reach the expected result from the given expression using information in the graph. Include the expression and the result in the example as well.")
+
+        class Classifier(dspy.Signature):
+            graph: str = dspy.InputField(desc=graph_desc)
+            concept: str = dspy.InputField(desc=expression_desc)
+            examples: str = dspy.InputField(desc="Few-shot examples on this task.")
+            classified_entities: List[str] = dspy.OutputField(
+                desc="Every entity on the provided knowledge graph that can be classified by the given concept Result must be a list of unique entities.")
+
+        examples_generator = dspy.Predict(Examples)
+
+
+
+        example_ce_result = dict()
+        if self.expression_language == "manchester":
+            syntax = """Manchester Syntax is a user-friendly, text-based format for writing OWL (Web Ontology Language) 
+            class expressions. It's designed to be more readable than XML or RDF serializations. It's commonly used in tools
+            like Protégé to define logical descriptions of concepts in an ontology.
+    
+            Key Features:
+            Classes, properties, and individuals are written by name.
+            
+            Logical operators are written in a readable way:
+            
+            and for intersection (⊓)
+            
+            or for union (⊔)
+            
+            not for negation (¬)
+            
+            Property restrictions use natural language-like constructs:
+            
+            some for existential quantification (∃)
+            
+            only for universal quantification (∀)
+            
+            Examples:
+            Person and (hasChild some Doctor)
+            
+            A person who has at least one child who is a doctor.
+            
+            Animal and (hasPart only Leg)
+            
+            An animal all of whose parts are legs.
+            """
+            if self.triple_without_namespace:
+                example_ce_result = {"hasChild some {markus , michelle , anna}": ['markus', 'stefan'],
+                                     "hasChild min 1 person": ['markus', 'martin', 'anna', 'stefan']}
+            else:
+                example_ce_result = {"hasChild some {markus , michelle , anna}": ['http://example.com/father#markus',
+                                                                                  'http://example.com/father#stefan'],
+                                     "hasChild min 1 person": ['http://example.com/father#markus',
+                                                               'http://example.com/father#martin',
+                                                               'http://example.com/father#anna',
+                                                               'http://example.com/father#stefan']}
+        elif self.expression_language == "dl":
+            syntax = """
+                            Description Logics (DLs) are a family of formal knowledge representation languages used to describe and reason about the concepts and relationships in a domain. DLs form the logical foundation of the OWL (Web Ontology Language) used in semantic web and ontology engineering.
+
+                            Core Ideas:
+                            DLs use concepts (classes), roles (properties), and individuals (instances).
+
+                            They allow you to define complex class expressions and perform reasoning tasks like checking consistency, subsumption (class hierarchies), and instance classification.
+
+                            Key Constructs:
+                            ⊓ (and): Concept intersection
+
+                            e.g., Student ⊓ Employee = things that are both students and employees
+
+                            ⊔ (or): Concept union
+
+                            e.g., Doctor ⊔ Nurse = things that are doctors or nurses
+
+                            ¬ (not): Concept negation
+
+                            e.g., ¬Male = things that are not male
+
+                            ∃ R.C: Existential restriction (some)
+
+                            e.g., ∃ hasChild.Doctor = things that have at least one child who is a doctor
+
+                            ∀ R.C: Universal restriction (only)
+
+                            e.g., ∀ hasPart.Leg = things all of whose parts are legs
+
+                            Example:
+                            Suppose we define:
+
+                            Parent ≡ Person ⊓ ∃ hasChild.Person
+                            This means a Parent is a Person who has at least one child who is also a Person.
+                            """
+            if self.triple_without_namespace:
+                example_ce_result = {"∃ hasChild.{markus ⊔ michelle ⊔ anna}": ['markus', 'stefan'],
+                                      "≥ 1 hasChild.person": ['markus', 'martin', 'anna', 'stefan']}
+            else:
+                example_ce_result = {"∃ hasChild.{markus ⊔ michelle ⊔ anna}": ['http://example.com/father#markus',
+                                                                                'http://example.com/father#stefan'],
+                                      "≥ 1 hasChild.person": ['http://example.com/father#markus',
+                                                              'http://example.com/father#martin',
+                                                              'http://example.com/father#anna',
+                                                              'http://example.com/father#stefan']}
         examples = ""
 
         for expression, true_set in example_ce_result.items():
@@ -249,7 +327,7 @@ class IRLLM:
 
         print(f"Examples: {examples}")
 
-        program = dspy.ChainOfThought(Classifier4)
+        program = dspy.ChainOfThought(Classifier)
 
         # Load the ground truth results CSV once
         if not os.path.exists(results_csv_path):
@@ -274,14 +352,18 @@ class IRLLM:
 
         evaluation_results: List[Dict[str, Any]] = []
         total_jaccard_similarity = 0.0 # Variable to sum Jaccard similarities
-        named_individuals = {ind.str for ind in self.ontology.individuals_in_signature()}
+        if self.triple_without_namespace:
+            named_individuals = {self.strip_namespaces(ind.str) for ind in self.ontology.individuals_in_signature()}
+        else:
+            named_individuals = {ind.str for ind in self.ontology.individuals_in_signature()}
 
         print(f"\nStarting evaluation of {len(df_ground_truth)} concepts...")
 
         for index, row in (tqdm_bar :=tqdm(df_ground_truth.iterrows(), total=len(df_ground_truth), desc="Evaluating Concepts")):
             try:
                 concept = row.iloc[0] # Use iloc for potentially better performance and clarity
-                concept = owl_expression_to_manchester(dl_to_owl_expression(concept, namespace="http://example.com/father#"))
+                if self.expression_language == "manchester":
+                    concept = owl_expression_to_manchester(dl_to_owl_expression(concept, namespace="http://example.com/father#"))
                 # Assuming the true instances are in the third column (index 2)
                 # and are stored as a string representation of a Python list/set
                 true_instances_str = row.iloc[2]
@@ -366,10 +448,13 @@ if __name__ == "__main__":
                         help="Seed for the LLM (for reproducibility if the LLM supports it).")
     parser.add_argument("--llm_model", type=str, default="tentris",
                         help="The name or identifier of the LLM model to use.")
-    parser.add_argument("--results_csv_path", type=str, default="ALCQHI_Retrieval_Results2.csv",
+    parser.add_argument("--results_csv_path", type=str, default="ALCQHI_Retrieval_Results.csv",
                         help="Path to the CSV file containing ground truth DL expressions and instances.")
-    parser.add_argument("--output_csv_path", type=str, default="Results9.csv",
+    parser.add_argument("--output_csv_path", type=str, default="IRLLM_Results.csv",
                         help="Path to save the evaluation results CSV.")
+    parser.add_argument("--expression_language", type=str, default="manchester", choices=["manchester", "dl"])
+    parser.add_argument("--triple_without_namespace", action="store_true")
+
 
     args = parser.parse_args()
 
@@ -383,6 +468,7 @@ if __name__ == "__main__":
 
 
     # Instantiate and run the evaluation
-    model = IRLLM(args.kg_path, args.base_url, args.api_key, args.temperature, args.seed, args.llm_model)
+    model = IRLLM(args.kg_path, args.base_url, args.api_key, args.temperature, args.seed, args.llm_model,
+                  args.expression_language, args.triple_without_namespace)
 
     model.evaluate(results_csv_path=args.results_csv_path, output_csv_path=args.output_csv_path)
