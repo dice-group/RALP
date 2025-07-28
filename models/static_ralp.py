@@ -6,7 +6,7 @@ from typing import List, Tuple, Set
 from tqdm import tqdm
 from models import KG, AbstractBaseLinkPredictorClass
 from arguments import parser
-from utils import sanity_checking, MultiLabelLinkPredictionWithScores, BasicMultiLabelLinkPredictor
+from utils import sanity_checking, BasicMultiLabelLinkPredictor
 from dicee.evaluator import evaluate_lp_k_vs_all
 from dotenv import load_dotenv
 load_dotenv()
@@ -76,9 +76,7 @@ def find_missing_triples(model:AbstractBaseLinkPredictorClass,train_set:np.ndarr
         scores = predictions[0]
         mask = scores > threshold
         matching_indices = torch.nonzero(mask, as_tuple=True)[0]  # Get just the indices, shape: [num_matches]
-        # print("Scores > 0.5:")
-        # print(scores[matching_indices])
-        # print("Indices with score > 0.5:")
+
         entities=[ model.idx_to_entity[i]for i in matching_indices.tolist()]
         for new_o in entities:
             founded_triples.add((s,p,new_o))
@@ -88,8 +86,6 @@ def find_missing_triples(model:AbstractBaseLinkPredictorClass,train_set:np.ndarr
 # test the dspy model -> remove later
 if __name__ == "__main__":
     args=parser.parse_args()
-    # Important: add_reciprocal=False in KvsAll implies that inverse relation has been introduced.
-    # Therefore, The link prediction results are based on the missing tail rankings only!
     kg = KG(dataset_dir=args.dataset_dir, separator="\s+", eval_model=args.eval_model, add_reciprocal=False)
     sanity_checking(args,kg)
     model = StaticRALP(knowledge_graph=kg, base_url=args.base_url, api_key=args.api_key, llm_model=args.llm_model_name, temperature=args.temperature, seed=args.seed)

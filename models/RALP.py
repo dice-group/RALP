@@ -3,7 +3,7 @@ import time
 import dspy
 import torch
 import json
-from typing import List, Tuple, Callable, Protocol, Any
+from typing import List, Tuple, Protocol, Any
 from models import KG, AbstractBaseLinkPredictorClass
 from arguments import parser
 from utils import sanity_checking
@@ -288,11 +288,8 @@ class RALP(AbstractBaseLinkPredictorClass):
         return predicted_triples
 
 
-# test the dspy model -> remove later
 if __name__ == "__main__":
     args=parser.parse_args()
-    # Important: add_reciprocal=False in KvsAll implies that inverse relation has been introduced.
-    # Therefore, The link prediction results are based on the missing tail rankings only!
     kg = KG(dataset_dir=args.dataset_dir, separator="\s+", eval_model=args.eval_model, add_reciprocal=False)
     sanity_checking(args,kg)
     model = RALP(knowledge_graph=kg, base_url=args.base_url, api_key=args.api_key,

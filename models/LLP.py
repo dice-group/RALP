@@ -89,7 +89,6 @@ class LLP:
                        "mass_kilogram",
                        "height_metre",
                        "coordinate_location_longitude"]
-        # self.pred_sample = ["population","human_development_index"]
 
         self.eval_sample = [(s, p) for s, p, _ in self.numeric_triples if p in self.pred_sample]
         self.entity_relation_to_literals = dict()
