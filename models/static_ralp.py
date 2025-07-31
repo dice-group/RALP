@@ -7,7 +7,7 @@ from tqdm import tqdm
 from models import KG, AbstractBaseLinkPredictorClass
 from arguments import parser
 from utils import sanity_checking, BasicMultiLabelLinkPredictor
-from dicee.evaluator import evaluate_lp_k_vs_all
+from dicee.evaluator import Evaluator
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -88,6 +88,7 @@ if __name__ == "__main__":
     args=parser.parse_args()
     kg = KG(dataset_dir=args.dataset_dir, separator="\s+", eval_model=args.eval_model, add_reciprocal=False)
     sanity_checking(args,kg)
+    evaluator = Evaluator(args)
     model = StaticRALP(knowledge_graph=kg, base_url=args.base_url, api_key=args.api_key, llm_model=args.llm_model_name, temperature=args.temperature, seed=args.seed)
 
     if args.enrich_train:
@@ -99,8 +100,7 @@ if __name__ == "__main__":
                 f.write(f"{s}\t{p}\t{o}\n")
         print(f"Missing triples written to {paths}")
 
-    results:dict = evaluate_lp_k_vs_all(model=model, triple_idx=kg.test_set[:args.eval_size],
-                         er_vocab=kg.er_vocab, info='Eval KvsAll Starts', batch_size=args.batch_size)
+    results:dict = evaluator.evaluate_lp_k_vs_all(model=model, triple_idx=kg.test_set[:args.eval_size])
     if args.out and results:
         # Writing the dictionary to a JSON file
         print(results)

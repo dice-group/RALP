@@ -5,24 +5,27 @@ For the ease of referencing, different models that we have implemented
 here are put under the name 'RALP framework' or for short, just 'RALP'.
 
 ## Link Prediction Results via Static RALP
-```
-python -m models.static_ralp --enrich_train --dataset_dir KGs/Countries-S3 --out "countries_s3_results.json" && cat countries_s3_results.json
+
+In the following command, please specify also the arguments to configure the LLM: `--base_url`, `--llm_model_name` and `--api_key`.
+```aiignore
+python -m models.static_ralp --enrich_train --dataset_dir KGs/Countries-S3 --out "countries_s3_results.json"  && cat countries_s3_results.json
 ```
 
-```
+```aiignore
 cp -r KGs/Countries-S3 KGs/Enriched_Countries-S3
 cat KGs/Enriched_Countries-S3/missing_triples.txt >> KGs/Enriched_Countries-S3/train.txt
 bash rag_standard_exp.sh --dataset_dir KGs/Enriched_Countries-S3
 ```
 
 #### Latex Table 
-```
+
+```aiignore
 python dicee/analyse_experiments.py --dir Experiments --features "model" "testMRR" "testH@1" "testH@3" "testH@10"
 ```
 
 do not forget to delete Experiments:
 
-```
+```aiignore
 rm -rf Experiments
 ```
 

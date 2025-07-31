@@ -6,7 +6,7 @@ from typing import List, Tuple, Dict, Set, Any, Protocol
 from models import KG, AbstractBaseLinkPredictorClass
 from arguments import parser
 from utils import sanity_checking
-from dicee.evaluator import evaluate_lp_k_vs_all
+from dicee.evaluator import Evaluator
 from dotenv import load_dotenv
 import os
 from dspy.evaluate import Evaluate
@@ -538,6 +538,7 @@ if __name__ == "__main__":
     print(f"Loading KG from: {args.dataset_dir}")
     kg = KG(dataset_dir=args.dataset_dir, separator="\s+", eval_model=args.eval_model, add_reciprocal=False)
     sanity_checking(args, kg) # Assuming this function exists and checks args
+    evaluator = Evaluator(args)
     print("Initializing RALP with MIPROv2...")
     model = RALP_MPRO(knowledge_graph=kg, base_url=args.base_url, api_key=args.api_key,
                               llm_model=args.llm_model_name, temperature=args.temperature,
@@ -548,8 +549,7 @@ if __name__ == "__main__":
         # Limit evaluation size if needed (e.g., during testing)
         eval_triples = kg.test_set[:args.eval_size] if args.eval_size > 0 else kg.test_set
         print(f"Evaluating on {len(eval_triples)} test triples...")
-        results: dict = evaluate_lp_k_vs_all(model=model, triple_idx=eval_triples,
-                                             er_vocab=kg.er_vocab,
+        results: dict = evaluator.evaluate_lp_k_vs_all(model=model, triple_idx=eval_triples,
                                              info='Eval KvsAll (RALP_MPRO) Starts')
     else: # Print prediction generated from the train set
         x = kg.train_set[:, [0, 1]]

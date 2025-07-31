@@ -6,7 +6,7 @@ from typing import List, Tuple, Protocol, Any
 from models import KG, AbstractBaseLinkPredictorClass
 from arguments import parser
 from utils import sanity_checking
-from dicee.evaluator import evaluate_lp_k_vs_all
+from dicee.evaluator import Evaluator
 from dotenv import load_dotenv
 import tiktoken
 from collections import Counter
@@ -403,12 +403,13 @@ if __name__ == "__main__":
     args=parser.parse_args()
     kg = KG(dataset_dir=args.dataset_dir, separator="\s+", eval_model=args.eval_model, add_reciprocal=False)
     sanity_checking(args,kg)
+    evaluator = Evaluator(args)
     model = RALP(knowledge_graph=kg, base_url=args.base_url, api_key=args.api_key,
                               llm_model=args.llm_model_name, temperature=args.temperature, seed=args.seed)
     start = time.time()
     if not args.print_top_predictions:
-        results:dict = evaluate_lp_k_vs_all(model=model, triple_idx=kg.test_set[:args.eval_size],
-                             er_vocab=kg.er_vocab, info='Eval KvsAll Starts', batch_size=args.batch_size)
+        results:dict = evaluator.evaluate_lp_k_vs_all(model=model, triple_idx=kg.test_set[:args.eval_size],
+                             info='Eval KvsAll Starts')
     else:
         x = kg.train_set[:, [0, 1]]
         results = model.get_predicted_triples(x, args.k)
